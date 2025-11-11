@@ -1,0 +1,39 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import AperturaCaja from "./pages/AperturaCaja";
+import ArqueoCaja from "./pages/ArqueoCaja";
+import TrasladoEfectivo from "./pages/TrasladoEfectivo";
+import RecepcionTraslado from "./pages/RecepcionTraslado";
+import Historial from "./pages/Historial";
+import Configuraciones from "./pages/Configuraciones";
+import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/apertura-caja" element={<AperturaCaja />} />
+          <Route path="/arqueo-caja" element={<ArqueoCaja />} />
+          <Route path="/traslado-efectivo" element={<TrasladoEfectivo />} />
+          <Route path="/recepcion-traslado" element={<RecepcionTraslado />} />
+          <Route path="/historial" element={<Historial />} />
+          <Route path="/configuraciones" element={<Configuraciones />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;
